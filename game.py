@@ -38,6 +38,9 @@ class Game:
         self.text2Rect.topright=(550,0)
         self.conn=mc.connect(host='localhost',user='root',password='root',database='game')
         self.wcur=self.conn.cursor()
+        db_creation_query="create database if not exists game"
+        self.conn.commit()
+        self.wcur.execute(db_creation_query)
         table_creation_query ="create table if not exists gamedata(timestamp varchar(50), level int)"
         self.wcur.execute(table_creation_query)
         self.conn.commit()
